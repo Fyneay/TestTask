@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  postgres:
+    container_name: irs_postgres
+    env_file:
+      - ./.env
+    image: postgres:16-alpine3.23
+    restart: always
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - irs-network
+
+  pgadmin:
+    container_name: irs_pgadmin
+    env_file:
+      - ./.env
+    image: dpage/pgadmin4:7.8
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - '5050:5050'
+    restart: always
+    networks:
+      - irs-network
+
+volumes:
+  pgdata:
+networks:
+  irs-network:
+    driver: bridge
