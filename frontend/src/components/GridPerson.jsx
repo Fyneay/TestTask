@@ -32,7 +32,7 @@ const GridPerson = ({onHandlerSelectionChanged, refreshIndex=0}) => {
     {field: "firstname", headerName: "Имя"},
     {field: "middlename", headerName: "Отчество"},
     {field: "birthday", headerName: "День рождения"},
-    {field: "team_id", headerName: "Команда"},
+    {field: "team_persons.name", headerName: "Команда"},
   ]);
 
   return (
