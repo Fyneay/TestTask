@@ -1,3 +1,4 @@
+
 CREATE TABLE teams (
     id int generated always as identity,
     name varchar(60) not null,
